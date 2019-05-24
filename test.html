@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>监听元素resize事件演示</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    #resizeDiv {
+      width: 60%;
+      height: 60%;
+      border: 1px solid red;
+      margin: 20px;
+      min-width: 200px;
+      min-height: 100px;
+    }
+
+    button {
+      margin: 20px 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="addListener()">addListener</button>
+  <button onclick="removeListener()">removeListener</button>
+  <button onclick="resize()">resize</button>
+  <div id="resizeDiv">
+    <p id="showHeight"></p>
+    <p id="showWidth"></p>
+  </div>
+  <script src="./eleResize.js"></script>
+  <script>
+    var resizeDiv = document.getElementById('resizeDiv')
+		function resize() {
+      var newRandomHeight = 100 * Math.random() + "%"
+      var newRandomWidth = 100 * Math.random() + "%"
+
+      resizeDiv.style.height = newRandomHeight;
+      resizeDiv.style.width = newRandomWidth;
+		}
+		var listener = function () {
+      document.getElementById('showHeight').innerHTML = "当前元素高度：" + resizeDiv.offsetHeight + "px"
+      document.getElementById('showWidth').innerHTML = "当前元素宽度：" + resizeDiv.offsetWidth + "px"
+		};
+		function addListener() {
+      eleResize.on(resizeDiv, listener);
+		}
+		function removeListener() {
+      eleResize.off(resizeDiv, listener)
+		}
+  </script>
+</body>
+
+</html>
